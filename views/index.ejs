@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lista de documentos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      .backgroundfiles {
+        width: 100%;
+        background-color: #ffffcc;
+        padding: 10px;
+      }
+
+      .progress-bar {
+        width: 100%;
+        background-color: #ccffcc;
+        border-radius: 8px;
+        border: 5px solid #ccffcc;
+        overflow: hidden;
+        overflow: hidden;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+      }
+  
+      .progress {
+        width: 0;
+        height: 100%;
+        background-color: #4CAF50;
+        transition: width 0.3s ease-in-out;
+      }
+    </style>
+  </head>
+  <body style="background-color: #ffffcc; margin: 0; padding: 0;">
+    <div class="backgroundfiles">
+      <h1 style="margin-top: 0;">Lista de documentos</h1>
+      <ul>
+        <% documents.forEach((document) => { %>
+        <li>
+          <a href="/<%= document._id %>"><%= document.title %></a>
+        </li>
+        <% }); %>
+      </ul>
+      <h2>Archivos Subidos</h2>
+      <ul id="uploadContent">
+        <% uploadedFiles.forEach((file) => { %>
+        <li><%= file.originalname %></li>
+        <% }); %>
+      </ul>
+      <div class="progress-bar" style="display: none;">
+        <div class="progress"></div>
+      </div>
+      <form id="uploadForm" class="progress-bar" action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="fileInput">
+        <input type="submit" value="Subir archivo" onclick="submitForm(event)">
+      </form>
+      <script src="loadata.js"></script>
+    </div>
+  </body>
+</html>
